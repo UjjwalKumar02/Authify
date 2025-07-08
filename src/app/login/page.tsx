@@ -6,43 +6,42 @@ import Link from "next/link";
 
 
 
-export default function createUserPage(){
+export default function loginPage(){
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     email: "",
-    username: "",
     password: ""
   });
-  
 
-  const onSignup = async() => {
+
+  const onLogin = async() => {
     try {
-      if(!user.email || !user.username || !user.password){
-        alert("All fields are required!");
+      if(!user.email || !user.password){
+        alert("All fields are required");
         return;
       }
 
       setLoading(true);
-      const response = await axios.post("/api/create-account", user);
-      console.log("Signup successful.", response.data);
-      router.push("/login");
+      const response = await axios.post("/api/login", user);
+      console.log("Login success", response.data);
+      router.push("/");     // profile
 
     } catch (error: any) {
-      console.log("Signup failed : ", error.message);
+      console.log("Login failed : ", error.messsage);
 
     } finally {
       setLoading(false);
     }
-  }
+  };
 
 
   return(
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-2">
         <h1 className="text-3xl font-semibold mb-5">
-          Create an account
+          Login
         </h1>
         <label htmlFor="email">Email</label>
         <input 
@@ -51,16 +50,6 @@ export default function createUserPage(){
           placeholder="Enter your email"
           value={user.email}
           onChange={(e) => setUser({...user, email: e.target.value})}
-          className="bg-gray-100 rounded-lg p-2 w-full"
-          />
-        <hr />
-        <label htmlFor="username">Username</label>
-        <input 
-          id="username"
-          type="text"
-          placeholder="Enter your username"
-          value={user.username}
-          onChange={(e) => setUser({...user, username: e.target.value})}
           className="bg-gray-100 rounded-lg p-2 w-full"
           />
         <hr />
@@ -76,14 +65,14 @@ export default function createUserPage(){
         <hr />
         <hr />
         <button
-          onClick={onSignup}
+          onClick={onLogin}
           className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-600 cursor-pointer"
         >
-          {loading ? "Processing" : "Signup"}
+          {loading ? "Processing" : "Login"}
         </button>
         <hr />
         <p>
-          Already had a account? <Link href={"/login"} className="underline text-blue-500">Login here</Link>
+          Create a new account? <Link href={"/create-account"} className="underline text-blue-500">Signup here</Link>
         </p>
       </div>
     </div>

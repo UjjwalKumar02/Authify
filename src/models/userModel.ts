@@ -26,4 +26,6 @@ const userSchema = new mongoose.Schema({
   passwordResetTokenExpiry: Date
 });
 
-export const User = mongoose.model("users", userSchema);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
+
+export default User;

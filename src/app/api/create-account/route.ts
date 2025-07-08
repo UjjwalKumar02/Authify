@@ -1,14 +1,17 @@
 import { connectDb } from "@/lib/db";
-import { User } from "@/models/userModel";
+import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 
+
 connectDb();
 
-export const POST = async(request: NextRequest) => {
+export async function POST(request: NextRequest){
   try {
-    const {email, username, password} = await request.json();
+    const reqBody = await request.json();
+    const {email, username, password} = await reqBody;
+
     const normalizedEmail = email.toLowerCase();
 
 
