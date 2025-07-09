@@ -1,7 +1,11 @@
 ## Auth-app
 
-A simple end-to-end aunthentication web app where you can :
+A simple end-to-end authentication web app. 
+
+Features :
 - create a new account
+- verify your email
+- login to your account
 - more features coming...
 
 ## Techstack:
@@ -9,4 +13,6 @@ A simple end-to-end aunthentication web app where you can :
 - TypeScript
 - Tailwind CSS
 - mongoose
+- nodemailer
 - axios
+- JWT

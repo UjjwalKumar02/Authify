@@ -27,7 +27,7 @@ export default function createUserPage(){
       setLoading(true);
       const response = await axios.post("/api/create-account", user);
       console.log("Signup successful.", response.data);
-      router.push("/login");
+      router.push("/verify-email");
 
     } catch (error: any) {
       console.log("Signup failed : ", error.message);
@@ -77,13 +77,13 @@ export default function createUserPage(){
         <hr />
         <button
           onClick={onSignup}
-          className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-600 cursor-pointer"
+          className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-800 cursor-pointer"
         >
           {loading ? "Processing" : "Signup"}
         </button>
         <hr />
         <p>
-          Already had a account? <Link href={"/login"} className="underline text-blue-500">Login here</Link>
+          Already had a account? <Link href={"/login"} className="text-blue-500">Login here</Link>
         </p>
       </div>
     </div>
