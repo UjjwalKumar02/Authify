@@ -1,12 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 
 
 
 export default function verifyEmailPage(){
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
@@ -32,7 +33,25 @@ export default function verifyEmailPage(){
 
     } finally {
       setLoading(false);
+      localStorage.removeItem("userEmail");
     }
+  }
+
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+
+    setUser({
+      email: userEmail || "",
+      verificationCode: ""
+    });
+  }, [])
+
+
+  function maskEmail(emailId: string) {
+    const [name, domain] = emailId.split("@");
+    const maskedEmail = name.slice(0, 3) + "***";
+    return maskedEmail + "@" + domain;
   }
 
 
@@ -42,24 +61,18 @@ export default function verifyEmailPage(){
         <h1 className="text-3xl font-semibold mb-5">
           Verify your email
         </h1>
-        <p className="w-70 text-center italic mb-5">A verification code has been sent to your email. Please check your inbox.</p>
-        <label htmlFor="email">Email</label>
-        <input 
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          value={user.email}
-          onChange={(e) => setUser({...user, email: e.target.value})}
-          className="bg-gray-100 rounded-lg p-2 "
-          />
+        <p className="text-center text-gray-700">
+          Verification code sent to "{maskEmail(user.email)}". Check your inbox.
+        </p>
         <hr />
-        <label htmlFor="verificationCode">Code</label>
+        <hr />
         <input 
           id="verificationCode"
-          type="password"
+          type="text"
           value={user.verificationCode}
           onChange={(e) => setUser({...user, verificationCode: e.target.value})}
-          className="bg-gray-100 rounded-lg p-2 "
+          placeholder="Enter your code"
+          className="bg-gray-100 rounded-lg p-2"
           />
         <hr />
         <hr />

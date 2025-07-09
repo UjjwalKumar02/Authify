@@ -27,6 +27,7 @@ export default function createUserPage(){
       setLoading(true);
       const response = await axios.post("/api/create-account", user);
       console.log("Signup successful.", response.data);
+      localStorage.setItem("userEmail", user.email);
       router.push("/verify-email");
 
     } catch (error: any) {
