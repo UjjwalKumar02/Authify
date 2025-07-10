@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import Timer from "@/components/Timer.tsx"
+import Timer from "@/components/Timer"
 
 
 
