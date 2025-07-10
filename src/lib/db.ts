@@ -15,7 +15,7 @@ export async function connectDb(){
       process.exit();
     })
 
-  } catch (error: any) {
-    console.log("Something went wrong while connecting database: " + error.message);
+  } catch (error: unknown) {
+    console.log("Something went wrong while connecting database: " + error);
   }
 }

@@ -10,7 +10,7 @@ export const transporter = nodemailer.createTransport({
   }
 });
 
-transporter.verify((error, success) => {
+transporter.verify((error) => {
   if(error){
     console.log("Email transport error: ", error);
   } else {

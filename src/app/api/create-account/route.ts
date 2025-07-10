@@ -75,8 +75,8 @@ export async function POST(request: NextRequest){
     );
 
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log("Error in user registration : ", error);
-    return NextResponse.json({error: error.message}, {status: 500});
+    return NextResponse.json({error: "Error in user registration"}, {status: 500});
   }
 }

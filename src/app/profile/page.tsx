@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 
 
-export default function profilePage() {
+export default function ProfilePage() {
 
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -20,8 +20,8 @@ export default function profilePage() {
       localStorage.removeItem("username");
       router.push("/");
 
-    } catch (error: any) {
-      console.log("Error in logout: ", error.message);
+    } catch (error: unknown) {
+      console.log("Error in logout: ", error);
 
     } finally {
       setLoading(false);

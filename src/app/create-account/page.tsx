@@ -6,7 +6,7 @@ import Link from "next/link";
 
 
 
-export default function createUserPage(){
+export default function CreateUserPage(){
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -30,8 +30,8 @@ export default function createUserPage(){
       localStorage.setItem("userEmail", user.email);
       router.push("/verify-email");
 
-    } catch (error: any) {
-      console.log("Signup failed : ", error.message);
+    } catch (error: unknown) {
+      console.log("Signup failed : ", error);
 
     } finally {
       setLoading(false);

@@ -56,8 +56,8 @@ export async function POST(request: NextRequest){
     );
 
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log("Error in user verification: ", error);
-    return NextResponse.json({error: error.message}, {status: 500});
+    return NextResponse.json({error: "Error in user verification"}, {status: 500});
   }
 }

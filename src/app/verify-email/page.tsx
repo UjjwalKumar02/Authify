@@ -7,7 +7,7 @@ import Timer from "@/components/Timer.tsx"
 
 
 
-export default function verifyEmailPage(){
+export default function VerifyEmailPage(){
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -29,8 +29,8 @@ export default function verifyEmailPage(){
       console.log("Verification successful!", response.data);
       router.push("/login");
 
-    } catch (error: any) {
-      console.log("Verification failed: ", error.message);
+    } catch (error: unknown) {
+      console.log("Verification failed: ", error);
 
     } finally {
       setLoading(false);
@@ -62,7 +62,7 @@ export default function verifyEmailPage(){
           Verify your email
         </h1>
         <p className="text-center text-gray-700">
-          Verification code sent to "{maskEmail(user.email)}". Check your inbox.
+          Verification code sent to &quot;{maskEmail(user.email)}&quot;. Check your inbox.
           <br />
           Your code will expire in <Timer initialMinutes={10} initialSeconds={10} />
         </p>

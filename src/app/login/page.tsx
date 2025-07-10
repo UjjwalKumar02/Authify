@@ -6,7 +6,7 @@ import Link from "next/link";
 
 
 
-export default function loginPage(){
+export default function LoginPage(){
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -29,8 +29,8 @@ export default function loginPage(){
       localStorage.setItem("username", response.data.username);
       router.push("/profile");
 
-    } catch (error: any) {
-      console.log("Login failed : ", error.messsage);
+    } catch (error: unknown) {
+      console.log("Login failed : ", error);
 
     } finally {
       setLoading(false);
@@ -73,7 +73,7 @@ export default function loginPage(){
         </button>
         <hr />
         <p>
-          Don't have an account? <Link href={"/create-account"} className=" text-blue-500">Sign up</Link>
+          Don&apos;t have an account? <Link href={"/create-account"} className=" text-blue-500">Sign up</Link>
         </p>
       </div>
     </div>
