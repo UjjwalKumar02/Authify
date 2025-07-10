@@ -17,6 +17,6 @@ export async function GET() {
     return response;
 
   } catch (error: unknown) {
-    return NextResponse.json({error: "Error in logging out."}, {status: 500});
+    return NextResponse.json({error: "Error in logging out." + error}, {status: 500});
   }
 }
