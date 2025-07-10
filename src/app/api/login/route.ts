@@ -6,7 +6,8 @@ import jwt from "jsonwebtoken";
 
 
 
-connectDb();
+await connectDb();
+
 
 export async function POST(request: NextRequest){
   try {
@@ -16,7 +17,6 @@ export async function POST(request: NextRequest){
     
     // find the user
     const user = await User.findOne({email});
-
     if(!user){
       return NextResponse.json({error: "Invalid credentials"}, {status: 400});
     }
@@ -24,7 +24,6 @@ export async function POST(request: NextRequest){
 
     // validate the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
     if(!isPasswordValid){
       return NextResponse.json({error: "Invalid password"}, {status: 400});
     }
@@ -44,6 +43,7 @@ export async function POST(request: NextRequest){
     const response = NextResponse.json(
       {
         message: "Login success",
+        username: user.username,
         success: true
       },
       {status: 200}

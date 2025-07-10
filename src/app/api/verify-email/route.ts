@@ -15,7 +15,6 @@ export async function POST(request: NextRequest){
 
 
     // finding the user with the code
-
     const tempUser = await TempUser.findOne({email: email.toLowerCase(), verificationCode});
 
     if(!tempUser){
@@ -27,8 +26,7 @@ export async function POST(request: NextRequest){
     }
 
 
-    // resend token
-
+    // "resend token" will add
 
 
 
@@ -48,6 +46,7 @@ export async function POST(request: NextRequest){
     await TempUser.deleteOne({email: email.toLowerCase(), verificationCode}); 
 
 
+    // response
     return NextResponse.json(
       {
         message: "User registered successfully",

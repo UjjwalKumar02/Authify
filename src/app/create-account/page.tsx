@@ -35,6 +35,11 @@ export default function createUserPage(){
 
     } finally {
       setLoading(false);
+      setUser({
+        email: "",
+        username: "",
+        password: ""
+      });
     }
   }
 
@@ -43,7 +48,7 @@ export default function createUserPage(){
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-2">
         <h1 className="text-3xl font-semibold mb-5">
-          Create an account
+          Create an Account
         </h1>
         <label htmlFor="email">Email</label>
         <input 
@@ -80,11 +85,11 @@ export default function createUserPage(){
           onClick={onSignup}
           className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-800 cursor-pointer"
         >
-          {loading ? "Processing" : "Signup"}
+          {loading ? "Loading..." : "Signup"}
         </button>
         <hr />
         <p>
-          Already had a account? <Link href={"/login"} className="text-blue-500">Login here</Link>
+          Already have a account? <Link href={"/login"} className="text-blue-500">Log in</Link>
         </p>
       </div>
     </div>

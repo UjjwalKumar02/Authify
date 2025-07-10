@@ -18,7 +18,6 @@ export async function POST(request: NextRequest){
 
     // Check if user already exists
     const existedUser = await User.findOne({email: email.toLowerCase()});
-
     if(existedUser){
       return NextResponse.json({error: "User already exists!"}, {status: 400});
     }
@@ -70,7 +69,6 @@ export async function POST(request: NextRequest){
     return NextResponse.json(
       {
         message: "Temporary user created successfully",
-        verificationCode,  // remove in prod
         success: true
       }, 
       {status: 201}

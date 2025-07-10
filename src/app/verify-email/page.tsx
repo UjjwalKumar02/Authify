@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import Timer from "@/components/Timer.tsx"
 
 
 
@@ -40,7 +41,6 @@ export default function verifyEmailPage(){
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
-
     setUser({
       email: userEmail || "",
       verificationCode: ""
@@ -63,6 +63,8 @@ export default function verifyEmailPage(){
         </h1>
         <p className="text-center text-gray-700">
           Verification code sent to "{maskEmail(user.email)}". Check your inbox.
+          <br />
+          Your code will expire in <Timer initialMinutes={10} initialSeconds={10} />
         </p>
         <hr />
         <hr />
@@ -80,11 +82,11 @@ export default function verifyEmailPage(){
           onClick={onVerify}
           className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-800 cursor-pointer"
         >
-          {loading ? "Processing" : "Verify"}
+          {loading ? "Processing..." : "Verify"}
         </button>
         <hr />
         <p>
-          Update your email, <Link href={"/create-account"} className="text-blue-500">Signup here</Link>
+          Change your email? <Link href={"/create-account"} className="text-blue-500">Sign up</Link>
         </p>
       </div>
     </div>

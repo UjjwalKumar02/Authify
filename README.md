@@ -1,5 +1,5 @@
 ## Auth-app
-<!-- prod emailer, email extraction, middleware, profile -->
+<!-- enhance profile, reset password, empty inputs-->
 A simple end-to-end authentication web app. 
 
 Features:

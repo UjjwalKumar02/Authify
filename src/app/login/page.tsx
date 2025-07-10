@@ -26,6 +26,7 @@ export default function loginPage(){
       setLoading(true);
       const response = await axios.post("/api/login", user);
       console.log("Login success", response.data);
+      localStorage.setItem("username", response.data.username);
       router.push("/profile");
 
     } catch (error: any) {
@@ -40,8 +41,8 @@ export default function loginPage(){
   return(
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-2">
-        <h1 className="text-3xl font-semibold mb-5">
-          Login
+        <h1 className="text-3xl mb-5 italic">
+          Auth app
         </h1>
         <label htmlFor="email">Email</label>
         <input 
@@ -68,11 +69,11 @@ export default function loginPage(){
           onClick={onLogin}
           className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-800 cursor-pointer"
         >
-          {loading ? "Processing" : "Login"}
+          {loading ? "Loading..." : "Login"}
         </button>
         <hr />
         <p>
-          Create a new account? <Link href={"/create-account"} className="underline text-blue-500">Signup here</Link>
+          Don't have an account? <Link href={"/create-account"} className=" text-blue-500">Sign up</Link>
         </p>
       </div>
     </div>
