@@ -1,31 +1,25 @@
-# Auth-app
+# Authify
 
-A simple end-to-end authentication web app built with Next.js, providing user registration, email verification, and secure login functionalities.
+A web app built with Next.js that implements JWT-based user authentication, validates users via email verification, and ensures secure user login.
 
+<br>
 
+## Technologies used:
 
-## 🚀 Features:
+- Next.js
+- TypeScript
+- Tailwind CSS
+- MongoDB with Mongoose
+- Nodemailer
+- JWT (JSON Web Tokens)
 
-✅ Create a new account  
-✅ Verify your email address  
-✅ Login to your account  
-✅ View your profile  
-✅ Logout  
-✅ More features coming...  
+<br>
 
+## Features:
+- Simple and intuitive user interface
+- Validates users through email verification
+- Implements route protection for authenticated users.
 
+<br>
 
-## 💻 Tech stack:
-
-- **Framework:** Next.js
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Database:** MongoDB with Mongoose
-- **Email service:** Nodemailer
-- **HTTP client:** axios
-- **Authentication:** JWT (JSON Web Tokens)
-
-
-### 🔗 Connect:
-
-Feel free to reach out if you have suggestions or want to collaborate!
+#### Feel free to connect for suggestions and collaboration.
