@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Nav from "@/components/Nav";
 
 
 
@@ -37,28 +38,29 @@ export default function ProfilePage() {
 
   return(
     <div className="min-h-screen">
-      <nav className="w-full fixed flex justify-center items-center p-4 border-b border-gray-300">
-        <h1 className="text-3xl italic">Auth app</h1>
-      </nav>
-      <div className="min-h-screen flex flex-col justify-center items-center gap-7">
-        <h1 className="text-3xl text-center">
-          Welcome, {username}
-        </h1>
-         
-        <div className="flex justify-center items-center flex-wrap ">
-          <button
-          className="bg-blue-500 text-white px-6 py-1.5  cursor-pointer hover:bg-blue-600"
-          >
-            Reset Password (soon...)
-          </button>
-          <button
-            onClick={onLogout}
-            className="bg-red-500 text-white px-6 py-1.5  cursor-pointer hover:bg-red-600"
-          >
-            {loading ? "Loading..." : "Logout"}
-          </button>
+      <Nav/>
+      <div className="min-h-screen flex justify-center items-center text-gray-700">
+        <div 
+        className="flex flex-col justify-center items-center md:gap-8 gap-6 md:py-13 md:px-18 px-9 py-11 rounded-lg"
+        >
+          <h1 className="text-3xl text-center  font-semibold text-blue-500">
+            {username}
+          </h1>
+          
+          <ul className="flex flex-col gap-3 text-lg items-center border border-gray-200 p-7 rounded-lg">
+            <li 
+            className="cursor-pointer"
+            >
+              Reset password
+            </li>
+            <li
+              onClick={onLogout} 
+              className="cursor-pointer"
+            >
+              {loading ? "Loading..." : "Logout"}
+            </li>
+          </ul>
         </div>
-        
       </div>
     </div>
   );

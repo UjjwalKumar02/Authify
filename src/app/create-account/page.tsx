@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import Nav from "@/components/Nav";
 
 
 
@@ -46,44 +47,45 @@ export default function CreateUserPage(){
 
   return(
     <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center gap-2">
-        <h1 className="text-3xl font-semibold mb-5">
-          Create an Account
-        </h1>
-        <label htmlFor="email">Email</label>
-        <input 
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          value={user.email}
-          onChange={(e) => setUser({...user, email: e.target.value})}
-          className="bg-gray-100 rounded-lg p-2 w-full"
-          />
-        <hr />
+      <Nav/>
+      <div 
+      className="flex flex-col items-center justify-center gap-2 border border-gray-200 px-10 py-11 rounded-lg text-gray-700"
+      >
+        <p className="text-xl mb-6 font-semibold text-center text-black">
+          Create a new account
+        </p>
         <label htmlFor="username">Username</label>
         <input 
           id="username"
           type="text"
-          placeholder="Enter your username"
+          placeholder="johndoe"
           value={user.username}
           onChange={(e) => setUser({...user, username: e.target.value})}
-          className="bg-gray-100 rounded-lg p-2 w-full"
+          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
+          />
+        <hr />
+        <label htmlFor="email">Email</label>
+        <input 
+          id="email"
+          type="email"
+          placeholder="johndoe@gmail.com"
+          value={user.email}
+          onChange={(e) => setUser({...user, email: e.target.value})}
+          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
           />
         <hr />
         <label htmlFor="password">Password</label>
         <input 
           id="password"
           type="password"
-          placeholder="Enter your password"
+          placeholder="password"
           value={user.password}
           onChange={(e) => setUser({...user, password: e.target.value})}
-          className="bg-gray-100 rounded-lg p-2 w-full"
+          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
           />
-        <hr />
-        <hr />
         <button
           onClick={onSignup}
-          className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-800 cursor-pointer"
+          className="bg-black text-white px-6 py-1.5 rounded-lg hover:bg-gray-800 cursor-pointer font-semibold mt-4"
         >
           {loading ? "Loading..." : "Signup"}
         </button>
