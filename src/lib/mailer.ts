@@ -22,14 +22,18 @@ transporter.verify((error) => {
 
 export const sendVerificationEmail = async(to: string, username: string, code: string) => {
   const mailOptions = {
-    from: `"Auth-app" <${process.env.EMAIL_USER}>`,
+    from: `"Authify" <${process.env.EMAIL_USER}>`,
     to,
     subject: "Your verification code",
     html: `
       <p>Hi ${username},</p>
+      <p>Welcome to Authify</p>
+      <br/>
+      <br/>
       <p>Your verification code is:</p>
       <h2>${code}</h2>
-      <p>This code will expire in 10 minutes.</p>
+      <br/>
+      <p>This code will expire in 2 hours.</p>
     `
   };
 

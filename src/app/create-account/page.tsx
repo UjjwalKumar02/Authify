@@ -11,11 +11,7 @@ export default function CreateUserPage(){
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({
-    email: "",
-    username: "",
-    password: ""
-  });
+  const [user, setUser] = useState({ email: "", username: "", password: "" });
   
 
   const onSignup = async() => {
@@ -36,11 +32,7 @@ export default function CreateUserPage(){
 
     } finally {
       setLoading(false);
-      setUser({
-        email: "",
-        username: "",
-        password: ""
-      });
+      setUser({ email: "", username: "", password: "" });
     }
   }
 
@@ -49,10 +41,10 @@ export default function CreateUserPage(){
     <div className="min-h-screen flex items-center justify-center">
       <Nav/>
       <div 
-      className="flex flex-col items-center justify-center gap-2 border border-gray-200 px-10 py-11 rounded-lg text-gray-700"
+      className="flex flex-col items-center justify-center gap-2 border border-gray-200 md:px-10 md:py-11 px-9 py-10 rounded-lg text-gray-700"
       >
         <p className="text-xl mb-6 font-semibold text-center text-black">
-          Create a new account
+          Register
         </p>
         <label htmlFor="username">Username</label>
         <input 
@@ -61,17 +53,17 @@ export default function CreateUserPage(){
           placeholder="johndoe"
           value={user.username}
           onChange={(e) => setUser({...user, username: e.target.value})}
-          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
+          className="bg-gray-100 rounded-lg md:py-2 md:px-3 md:w-66 w-62 py-1.5 px-2"
           />
         <hr />
         <label htmlFor="email">Email</label>
         <input 
           id="email"
           type="email"
-          placeholder="johndoe@gmail.com"
+          placeholder="your@gmail.com"
           value={user.email}
           onChange={(e) => setUser({...user, email: e.target.value})}
-          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
+          className="bg-gray-100 rounded-lg md:py-2 md:px-3 md:w-66 w-62 py-1.5 px-2"
           />
         <hr />
         <label htmlFor="password">Password</label>
@@ -81,7 +73,7 @@ export default function CreateUserPage(){
           placeholder="password"
           value={user.password}
           onChange={(e) => setUser({...user, password: e.target.value})}
-          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
+          className="bg-gray-100 rounded-lg md:py-2 md:px-3 md:w-66 w-62 py-1.5 px-2"
           />
         <button
           onClick={onSignup}
@@ -91,7 +83,7 @@ export default function CreateUserPage(){
         </button>
         <hr />
         <p>
-          Already have a account? <Link href={"/login"} className="text-blue-500">Log in</Link>
+          Already have an account? <Link href={"/login"} className="text-blue-500 underline">Log in</Link>
         </p>
       </div>
     </div>

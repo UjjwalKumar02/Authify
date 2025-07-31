@@ -33,7 +33,7 @@ export async function POST(request: NextRequest){
     const codeExpiry = new Date(Date.now() + parseInt(process.env.CODE_EXPIRY_MINUTES! || "10") * 60 * 1000);
 
 
-    // create new user
+    // create new temp user
     const existingTempUser = await TempUser.findOne({email: email.toLowerCase()});
 
     if(existingTempUser){
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest){
     );
 
 
-  } catch (error: unknown) {
+  } catch (error) {
     console.log("Error in user registration : ", error);
     return NextResponse.json({error: "Error in user registration"}, {status: 500});
   }

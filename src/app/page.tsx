@@ -16,13 +16,13 @@ export default function Home() {
     <div className="min-h-screen flex items-center justify-center">
       <Nav/>
       <div 
-      className="flex flex-col items-center justify-center gap-2"
+      className="flex flex-col items-center justify-center gap-2 p-2"
       >
         <h1 className="md:text-4xl text-3xl mb-3 font-semibold">
           Authify
         </h1>
         <p className="text-center text-lg text-gray-700">
-          A simple end-to-end authentication system.
+          A nextjs app that implements jwt-based authentication.
         </p>
         <hr />
         <hr />

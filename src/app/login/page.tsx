@@ -11,10 +11,7 @@ export default function LoginPage(){
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({
-    email: "",
-    password: ""
-  });
+  const [user, setUser] = useState({ email: "", password: "" });
 
 
   const onLogin = async() => {
@@ -26,12 +23,19 @@ export default function LoginPage(){
 
       setLoading(true);
       const response = await axios.post("/api/login", user);
-      console.log("Login success", response.data);
-      localStorage.setItem("username", response.data.username);
+      const { accessToken, username } = response.data;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("username", username);
+
+      console.log("Login success");
       router.push("/profile");
 
-    } catch (error: unknown) {
-      console.log("Login failed : ", error);
+    } catch (error: any) {
+      console.error("Login failed:", error?.response?.data?.error || error.message);
+      alert("Login failed: " + (error?.response?.data?.error || "Server error"));
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("username");
 
     } finally {
       setLoading(false);
@@ -43,7 +47,7 @@ export default function LoginPage(){
     <div className="min-h-screen flex items-center justify-center">
       <Nav/>
       <div 
-      className="flex flex-col items-center justify-center gap-2 border border-gray-200  px-10 py-11 rounded-lg text-gray-700"
+      className="flex flex-col items-center justify-center gap-2 border border-gray-200  md:px-10 md:py-11 px-9 py-10 rounded-lg text-gray-700"
       >
         <p className="text-xl mb-6 font-semibold text-center text-black">
           Login to your account
@@ -52,10 +56,10 @@ export default function LoginPage(){
         <input 
           id="email"
           type="email"
-          placeholder="johndoe@gmail.com"
+          placeholder="your@gmail.com"
           value={user.email}
           onChange={(e) => setUser({...user, email: e.target.value})}
-          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
+          className="bg-gray-100 rounded-lg md:py-2 md:px-3 md:w-66 w-62 py-1.5 px-2"
           />
         <hr />
         <label htmlFor="password">Password</label>
@@ -65,7 +69,7 @@ export default function LoginPage(){
           placeholder="password"
           value={user.password}
           onChange={(e) => setUser({...user, password: e.target.value})}
-          className="bg-gray-100 rounded-lg py-2 px-3 w-66"
+          className="bg-gray-100 rounded-lg md:py-2 md:px-3 md:w-66 w-62 py-1.5 px-2"
           />
         
         <button
@@ -76,7 +80,7 @@ export default function LoginPage(){
         </button>
         <hr />
         <p>
-          Don&apos;t have an account? <Link href={"/create-account"} className=" text-blue-500">Sign up</Link>
+          Don&apos;t have an account? <Link href={"/create-account"} className=" text-blue-500 underline">Sign up</Link>
         </p>
       </div>
     </div>

@@ -14,20 +14,22 @@ export async function POST(request: NextRequest){
     const {email, verificationCode} = reqBody;
 
 
-    // finding the user with the code
-    const tempUser = await TempUser.findOne({email: email.toLowerCase(), verificationCode});
+    // finding the user with email
+    const tempUser = await TempUser.findOne({email: email.toLowerCase()});
 
     if(!tempUser){
-      return NextResponse.json({error: "Invalid code"}, {status: 400});
+      return NextResponse.json({error: "Backend not supporting, wait..!"}, {status: 400});
     }
 
+
+    // validate the code
+    if(tempUser.verificationCode !== verificationCode){
+      return NextResponse.json({error: "Invalid code!"}, {status: 400});
+    }
+    
     if(tempUser.codeExpiry < new Date()){
-      return NextResponse.json({error: "Code expired!"}, {status: 400});
+      return NextResponse.json({error: "Code expired, please register again!"}, {status: 400});
     }
-
-
-    // "resend token" will add
-
 
 
     // create new user
@@ -35,7 +37,6 @@ export async function POST(request: NextRequest){
       username: tempUser.username,
       email: tempUser.email,
       password: tempUser.password,
-      isVerified: true
     });
 
     const savedUser = await newUser.save();
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest){
 
 
     // delete the temp user
-    await TempUser.deleteOne({email: email.toLowerCase(), verificationCode}); 
+    await TempUser.deleteOne({email: email.toLowerCase()}); 
 
 
     // response

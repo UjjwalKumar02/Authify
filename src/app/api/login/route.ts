@@ -29,28 +29,39 @@ export async function POST(request: NextRequest){
     }
 
 
-    // create token
+    // create access and refresh tokens
     const tokenData = {
       id: user._id,
       email: user.email,
       username: user.username
     };
 
-    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {expiresIn: "1d"});
+    const accessToken = jwt.sign(tokenData, process.env.ACCESS_TOKEN_SECRET!, {expiresIn: "10s"});
+    const refreshToken = jwt.sign(tokenData, process.env.REFRESH_TOKEN_SECRET!, {expiresIn: "7d"});
+
+
+    // save refresh token in db
+    user.refreshToken = refreshToken;
+    await user.save();
 
 
     // response
     const response = NextResponse.json(
       {
         message: "Login success",
+        accessToken,
         username: user.username,
         success: true
       },
       {status: 200}
     );
 
-    response.cookies.set("token", token, {
-      httpOnly: true
+    response.cookies.set("refreshToken", refreshToken, {
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === "production",
+      // sameSite: "Strict",
+      // path: "/",
+      // maxAge: 7 * 24 * 60 * 60, // 7 days
     });
 
     return response;

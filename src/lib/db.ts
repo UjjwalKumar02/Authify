@@ -6,16 +6,16 @@ export async function connectDb(){
     await mongoose.connect(process.env.MONGO_URL!);
     const connection = mongoose.connection;
 
-    connection.on("connected", () => {
+    connection.once("connected", () => {
       console.log("MongoDB connected successfully!");
-    })
+    });
 
     connection.on("error", (err) => {
-      console.log("MongoDB connection error : ", err);
-      process.exit();
-    })
+      console.log("MongoDB runtime connection error : ", err);
+      process.exit(1);
+    });
 
-  } catch (error: unknown) {
+  } catch (error) {
     console.log("Something went wrong while connecting database: " + error);
   }
 }

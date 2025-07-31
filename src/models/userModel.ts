@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  isVerified: {
-    type: Boolean,
-    default: false
-  },
+  // isVerified: {
+  //   type: Boolean,
+  //   default: false
+  // },
   passwordResetToken: {
     type: String,
     default: null

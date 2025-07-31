@@ -1,23 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
+import jwt from 'jsonwebtoken'
 
 
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-
-  const isPublicPath = path === "/create-account" || path === "/login" || path === "/verify-email" || path === "/";
-
-  const token = request.cookies.get("token")?.value || "";
+  const isPublicPath = ["/", "/login", "/create-account", "/verify-email"].includes(path);
 
 
-  // If logged in and trying to access public auth pages, redirect to /profile
-  if(isPublicPath && token) {
-    return NextResponse.redirect(new URL("/profile", request.nextUrl));
+  const token = request.cookies.get("refreshToken")?.value;
+  let isLoggedIn = false;
+
+
+  if (token) {
+    try {
+      // jwt.verify(token, process.env.REFRESH_TOKEN_SECRET!);
+      isLoggedIn = true;
+    } catch (error) {
+      console.warn("Invalid refresh token:", error);
+    }
   }
 
 
-  // If not logged in and trying to access protected routes, redirect to /
-  if(!isPublicPath && !token) {
+  if (isPublicPath && isLoggedIn) {
+    return NextResponse.redirect(new URL("/profile", request.nextUrl));
+  }
+  if (!isPublicPath && !isLoggedIn) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 

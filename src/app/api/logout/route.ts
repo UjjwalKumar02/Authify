@@ -9,7 +9,7 @@ export async function GET() {
       success: true
     });
 
-    response.cookies.set("token", "", {
+    response.cookies.set("refreshToken", "", {
       httpOnly: true,
       expires: new Date(0)
     });
